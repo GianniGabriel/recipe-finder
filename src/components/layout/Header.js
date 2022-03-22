@@ -8,6 +8,7 @@ import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 const { headerContainer, headerTitle, headerIcon } = styles;
 
 const Header = () => {
+  console.log("hello");
   return (
     <div className={headerContainer}>
       <FontAwesomeIcon
