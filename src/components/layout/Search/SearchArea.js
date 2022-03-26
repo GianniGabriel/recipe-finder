@@ -5,10 +5,10 @@ import IngredientForm from "./IngredientForm";
 import styles from "./SearchArea.module.css";
 import IngredientList from "./IngredientList";
 
-const { ingredientSearchContainer, searchBtn } = styles;
+const { ingredientSearchContainer, searchBtn , notFound } = styles;
 
 const SearchArea = () => {
-  const { getRecipes } = useContext(RecipeContext);
+  const { getRecipes , recipes} = useContext(RecipeContext);
 
   return (
     <div className={ingredientSearchContainer}>
@@ -17,8 +17,11 @@ const SearchArea = () => {
       <button onClick={getRecipes} className={searchBtn}>
         Search
       </button>
+      {recipes?.length === 0 && (<p className={notFound}>No recipes found!</p>)}
     </div>
+    
   );
+  
 };
 
 export default SearchArea;
