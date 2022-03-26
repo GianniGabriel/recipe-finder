@@ -1,14 +1,19 @@
 import React, { useContext } from "react";
 import RecipeContext from "../../../context/recipes/RecipeContext";
+
 import IngredientForm from "./IngredientForm";
+import IngredientList from "./IngredientList";
+import Spinner from "../Spinner";
 
 import styles from "./SearchArea.module.css";
-import IngredientList from "./IngredientList";
 
 const { ingredientSearchContainer, searchBtn , notFound } = styles;
 
 const SearchArea = () => {
-  const { getRecipes , recipes} = useContext(RecipeContext);
+ feature/add-no-recipe-found-text
+  const { getRecipes , isLoading, recipes} = useContext(RecipeContext);
+
+ main
 
   return (
     <div className={ingredientSearchContainer}>
@@ -17,7 +22,11 @@ const SearchArea = () => {
       <button onClick={getRecipes} className={searchBtn}>
         Search
       </button>
+ feature/add-no-recipe-found-text
       {recipes?.length === 0 && (<p className={notFound}>No recipes found!</p>)}
+      {isLoading && <Spinner />}
+
+ main
     </div>
     
   );
