@@ -10,10 +10,10 @@ import styles from "./SearchArea.module.css";
 const { ingredientSearchContainer, searchBtn , notFound } = styles;
 
 const SearchArea = () => {
- feature/add-no-recipe-found-text
+
   const { getRecipes , isLoading, recipes} = useContext(RecipeContext);
 
- main
+
 
   return (
     <div className={ingredientSearchContainer}>
@@ -22,11 +22,11 @@ const SearchArea = () => {
       <button onClick={getRecipes} className={searchBtn}>
         Search
       </button>
- feature/add-no-recipe-found-text
+
       {recipes?.length === 0 && (<p className={notFound}>No recipes found!</p>)}
       {isLoading && <Spinner />}
 
- main
+
     </div>
     
   );
