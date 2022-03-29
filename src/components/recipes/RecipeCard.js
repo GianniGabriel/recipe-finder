@@ -9,10 +9,12 @@ const {
   recipeCardContainer,
   recipeCardInfo,
   recipeTitle,
+  recipeImageContainer,
   recipeImage,
   recipeIngredientList,
   usedIngredient,
   recipeTime,
+  recipeLink,
 } = styles;
 
 const RecipeCard = ({ recipe }) => {
@@ -22,7 +24,9 @@ const RecipeCard = ({ recipe }) => {
   const staticIngredientList = useMemo(() => ingredientList, [recipes]);
   return (
     <div className={recipeCardContainer}>
-      <img className={recipeImage} src={image} alt={title} />
+      <div className={recipeImageContainer}>
+        <img className={recipeImage} src={image} alt={title} />
+      </div>
       <div className={recipeCardInfo}>
         <p className={recipeTitle}>{title}</p>
         <div className={recipeIngredientList}>
@@ -36,9 +40,13 @@ const RecipeCard = ({ recipe }) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
           possimus?
         </p>
+        <p className={recipeTime}>15 mins</p>
+        <FontAwesomeIcon
+          className={recipeLink}
+          icon={faArrowUpRightFromSquare}
+          size={"lg"}
+        />
       </div>
-      <p className={recipeTime}>15 mins</p>
-      <FontAwesomeIcon icon={faArrowUpRightFromSquare} size={"1x"} />
     </div>
   );
 };
