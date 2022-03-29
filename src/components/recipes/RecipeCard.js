@@ -1,5 +1,4 @@
-import React, { useContext, useMemo } from "react";
-import RecipeContext from "../../context/recipes/RecipeContext";
+import React from "react";
 
 import styles from "./RecipeCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,15 +12,15 @@ const {
   recipeImage,
   recipeIngredientList,
   usedIngredient,
+  missedIngredient,
   recipeTime,
   recipeLink,
 } = styles;
 
 const RecipeCard = ({ recipe }) => {
   const { image, title } = recipe;
-  const { ingredientList, recipes } = useContext(RecipeContext);
-  //eslint-disable-next-line
-  const staticIngredientList = useMemo(() => ingredientList, [recipes]);
+  console.log(recipe);
+
   return (
     <div className={recipeCardContainer}>
       <div className={recipeImageContainer}>
@@ -30,9 +29,19 @@ const RecipeCard = ({ recipe }) => {
       <div className={recipeCardInfo}>
         <p className={recipeTitle}>{title}</p>
         <div className={recipeIngredientList}>
-          {staticIngredientList.map((ingredient) => (
-            <p key={ingredient} className={usedIngredient}>
-              {ingredient}
+          {recipe.usedIngredients.map((ingredient) => (
+            <p key={ingredient.id} className={usedIngredient}>
+              {ingredient.name}
+            </p>
+          ))}
+          {recipe.missedIngredients.map((ingredient) => (
+            <p key={ingredient.id} className={missedIngredient}>
+              {ingredient.name}
+            </p>
+          ))}
+          {recipe.unusedIngredients.map((ingredient) => (
+            <p key={ingredient.id} className={missedIngredient}>
+              {ingredient.name}
             </p>
           ))}
         </div>
@@ -41,11 +50,9 @@ const RecipeCard = ({ recipe }) => {
           possimus?
         </p>
         <p className={recipeTime}>15 mins</p>
-        <FontAwesomeIcon
-          className={recipeLink}
-          icon={faArrowUpRightFromSquare}
-          size={"lg"}
-        />
+        <a className={recipeLink} href="#">
+          <FontAwesomeIcon icon={faArrowUpRightFromSquare} size={"lg"} />
+        </a>
       </div>
     </div>
   );

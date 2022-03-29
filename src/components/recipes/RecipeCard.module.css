@@ -7,14 +7,17 @@
 .recipeCardInfo {
   width: 750px;
   position: relative;
-  padding: 20px 0 0 25px;
-  background-color: #ebebeb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-left: 25px;
   border-radius: 0 10px 10px 0;
+  background-color: #ebebeb;
 }
 
 .recipeTitle {
   width: 85%;
-  font-size: 35px;
+  font-size: 40px;
   font-weight: 300;
 }
 
@@ -37,11 +40,18 @@
 
 .recipeIngredientList {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
+  column-gap: 20px;
+  row-gap: 2px;
+  font-size: 20px;
 }
 
 .usedIngredient {
   color: #1cd22e;
+}
+
+.missedIngredient {
+  color: red;
 }
 
 .recipeTime {
@@ -53,6 +63,7 @@
 
 .recipeLink {
   position: absolute;
+  color: black;
   bottom: 25px;
   right: 20px;
 }
