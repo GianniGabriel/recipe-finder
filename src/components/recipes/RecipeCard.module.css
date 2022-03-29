@@ -4,19 +4,23 @@
   margin-bottom: 70px;
 }
 
-.recipeCardInfo {
+.recipeCardInfoContainer {
   width: 750px;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding-left: 25px;
+  padding-left: 18px;
   border-radius: 0 10px 10px 0;
   background-color: #ebebeb;
 }
 
-.recipeTitle {
+.recipeCardInfo {
   width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.recipeTitle {
   font-size: 40px;
   font-weight: 300;
 }

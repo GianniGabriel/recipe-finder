@@ -11,7 +11,9 @@ const RecipeResults = () => {
   return (
     <div className={recipesContainer}>
       {recipes &&
-        recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)}
+        recipes.map((recipe, idx) => (
+          <RecipeCard key={recipe.id} recipe={recipe} idx={idx} />
+        ))}
     </div>
   );
 };
