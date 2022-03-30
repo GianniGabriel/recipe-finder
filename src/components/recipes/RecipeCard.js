@@ -14,6 +14,7 @@ const {
   recipeImage,
   recipeIngredientList,
   usedIngredient,
+  unusedIngredient,
   missedIngredient,
   recipeTime,
   recipeLink,
@@ -37,12 +38,12 @@ const RecipeCard = ({ recipe, idx }) => {
                 {ingredient.name}
               </p>
             ))}
-            {recipe.missedIngredients.map((ingredient) => (
-              <p key={ingredient.id} className={missedIngredient}>
+            {recipe.unusedIngredients.map((ingredient) => (
+              <p key={ingredient.id} className={unusedIngredient}>
                 {ingredient.name}
               </p>
             ))}
-            {recipe.unusedIngredients.map((ingredient) => (
+            {recipe.missedIngredients.map((ingredient) => (
               <p key={ingredient.id} className={missedIngredient}>
                 {ingredient.name}
               </p>
@@ -62,6 +63,7 @@ const RecipeCard = ({ recipe, idx }) => {
         </p>
         <a
           className={recipeLink}
+          rel="noreferrer"
           target="_blank"
           href={recipesInfo ? recipesInfo[idx].spoonacularSourceUrl : "#"}
         >

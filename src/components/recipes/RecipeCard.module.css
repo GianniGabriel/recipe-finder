@@ -54,8 +54,12 @@
   color: #1cd22e;
 }
 
-.missedIngredient {
+.unusedIngredient {
   color: red;
+}
+
+.missedIngredient {
+  color: #a5a5a5;
 }
 
 .recipeTime {

@@ -16,7 +16,7 @@ const RecipeState = (props) => {
     API_KEY: "a7dd53920d654051aea0cf45bf40c70f",
     RESPONSE_NUM: 5,
     RANKING: 1, // Maximize used ingredients (1) or minimize missing ingredients (2)
-    IGNORE_PANTRY: true,
+    IGNORE_PANTRY: false,
     INCLUDE_NUTRITION: false, // Include nutrition data to the recipe information
   };
   const initialState = {
