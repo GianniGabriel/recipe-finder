@@ -4,13 +4,20 @@ import RecipeModal from "./RecipeModal";
 
 import styles from "./RecipeCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-regular-svg-icons";
+import {
+  faArrowUpRightFromSquare,
+  faStar as faStarSolid,
+} from "@fortawesome/free-solid-svg-icons";
 
 const {
   recipeCardContainer,
   recipeCardInfoContainer,
   recipeCardInfo,
   recipeTitle,
+  recipeBtn,
+  unsavedRecipeBtn,
+  savedRecipeBtn,
   recipeImageContainer,
   recipeImage,
   recipeIngredientList,
@@ -26,11 +33,16 @@ const RecipeCard = ({ recipe, idx }) => {
   const { image, title } = recipe;
 
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isRecipeSaved, setIsRecipeSaved] = useState(false);
 
   const toggleModal = (e) => {
     if (e.target.parentElement?.id !== "ignore-modal") {
       setIsModalShown(true);
     }
+  };
+
+  const onRecipeSaveToggle = () => {
+    setIsRecipeSaved(!isRecipeSaved);
   };
 
   return (
@@ -41,7 +53,22 @@ const RecipeCard = ({ recipe, idx }) => {
         </div>
         <div className={recipeCardInfoContainer}>
           <div className={recipeCardInfo}>
-            <p className={recipeTitle}>{title}</p>
+            <div className={recipeTitle}>
+              <p>{title}</p>
+              <button
+                id="ignore-modal"
+                className={`${recipeBtn} ${
+                  !isRecipeSaved ? unsavedRecipeBtn : savedRecipeBtn
+                }`}
+                onClick={onRecipeSaveToggle}
+              >
+                {isRecipeSaved ? (
+                  <FontAwesomeIcon id="ignore-modal" icon={faStarSolid} />
+                ) : (
+                  <FontAwesomeIcon id="ignore-modal" icon={faStar} />
+                )}
+              </button>
+            </div>
             <div className={recipeIngredientList}>
               {recipe.usedIngredients.map((ingredient) => (
                 <p key={ingredient.id} className={usedIngredient}>
