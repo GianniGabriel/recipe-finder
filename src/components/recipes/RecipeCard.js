@@ -1,23 +1,17 @@
 import React, { useContext, useState } from "react";
 import RecipeContext from "../../context/recipes/RecipeContext";
+import RecipeSaveBtn from "./RecipeSaveBtn";
 import RecipeModal from "./RecipeModal";
 
 import styles from "./RecipeCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
-import {
-  faArrowUpRightFromSquare,
-  faStar as faStarSolid,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const {
   recipeCardContainer,
   recipeCardInfoContainer,
   recipeCardInfo,
   recipeTitle,
-  recipeBtn,
-  unsavedRecipeBtn,
-  savedRecipeBtn,
   recipeImageContainer,
   recipeImage,
   recipeIngredientList,
@@ -33,28 +27,11 @@ const RecipeCard = ({ recipe, idx }) => {
   const { image, title } = recipe;
 
   const [isModalShown, setIsModalShown] = useState(false);
-  const isRecipeInStorage = JSON.parse(
-    localStorage.getItem("savedRecipes")
-  )?.includes(recipe.id);
-  const [isRecipeSaved, setIsRecipeSaved] = useState(isRecipeInStorage);
 
   const toggleModal = (e) => {
     if (e.target.parentElement?.id !== "ignore-modal") {
       setIsModalShown(true);
     }
-  };
-
-  const onRecipeSaveToggle = () => {
-    let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
-    savedRecipes = savedRecipes ? savedRecipes : [];
-
-    if (!isRecipeSaved) {
-      savedRecipes.push(recipe.id);
-    } else {
-      savedRecipes = savedRecipes.filter((recipeId) => recipeId !== recipe.id);
-    }
-    localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
-    setIsRecipeSaved(!isRecipeSaved);
   };
 
   return (
@@ -67,19 +44,7 @@ const RecipeCard = ({ recipe, idx }) => {
           <div className={recipeCardInfo}>
             <div className={recipeTitle}>
               <p>{title}</p>
-              <button
-                id="ignore-modal"
-                className={`${recipeBtn} ${
-                  !isRecipeSaved ? unsavedRecipeBtn : savedRecipeBtn
-                }`}
-                onClick={onRecipeSaveToggle}
-              >
-                {isRecipeSaved ? (
-                  <FontAwesomeIcon id="ignore-modal" icon={faStarSolid} />
-                ) : (
-                  <FontAwesomeIcon id="ignore-modal" icon={faStar} />
-                )}
-              </button>
+              <RecipeSaveBtn recipe={recipe} />
             </div>
             <div className={recipeIngredientList}>
               {recipe.usedIngredients.map((ingredient) => (
