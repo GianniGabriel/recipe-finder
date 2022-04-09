@@ -33,7 +33,10 @@ const RecipeCard = ({ recipe, idx }) => {
   const { image, title } = recipe;
 
   const [isModalShown, setIsModalShown] = useState(false);
-  const [isRecipeSaved, setIsRecipeSaved] = useState(false);
+  const isRecipeInStorage = JSON.parse(
+    localStorage.getItem("savedRecipes")
+  )?.includes(recipe.id);
+  const [isRecipeSaved, setIsRecipeSaved] = useState(isRecipeInStorage);
 
   const toggleModal = (e) => {
     if (e.target.parentElement?.id !== "ignore-modal") {
@@ -42,6 +45,15 @@ const RecipeCard = ({ recipe, idx }) => {
   };
 
   const onRecipeSaveToggle = () => {
+    let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    savedRecipes = savedRecipes ? savedRecipes : [];
+
+    if (!isRecipeSaved) {
+      savedRecipes.push(recipe.id);
+    } else {
+      savedRecipes = savedRecipes.filter((recipeId) => recipeId !== recipe.id);
+    }
+    localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
     setIsRecipeSaved(!isRecipeSaved);
   };
 
